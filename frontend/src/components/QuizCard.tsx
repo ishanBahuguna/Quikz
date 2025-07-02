@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState , useEffect, useContext } from "react";
 import { QuizQuestionType } from "../types";
+import { RoomCodeContext  , SelectedOptionContext} from "../context"
+import useSocket from "../hooks/index"
 
 const QuizCard = (props: QuizQuestionType) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const {selectedOption , setSelectedOption} = useContext(SelectedOptionContext);
+  const [option , setOption] = useState<string | null>(null);
+  const {sendMessage} = useSocket("ws://localhost:5000");
+  const {roomCode} = useContext(RoomCodeContext)
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
+  console.log("Selected option : " , selectedOption )
+  console.log("Room code : " , roomCode);
+
 
   return (
     <div>
       <h2>{props?.question}</h2>
 
       <input
+        key={props.question + props.option1}
         type="radio"
         name={`options-${props.question}`}
         value={props.option1}
@@ -23,6 +32,7 @@ const QuizCard = (props: QuizQuestionType) => {
       <br />
 
       <input
+        key={props.question + props.option2}
         type="radio"
         name={`options-${props.question}`}
         value={props.option2}
@@ -35,6 +45,7 @@ const QuizCard = (props: QuizQuestionType) => {
       {props.option3 && (
         <>
           <input
+            key={props.question + props.option3}
             type="radio"
             name={`options-${props.question}`}
             value={props.option3}
@@ -49,6 +60,7 @@ const QuizCard = (props: QuizQuestionType) => {
       {props.option4 && (
         <>
           <input
+            key={props.question + props.option4}
             type="radio"
             name={`options-${props.question}`}
             value={props.option4}

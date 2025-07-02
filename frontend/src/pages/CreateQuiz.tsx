@@ -1,61 +1,3 @@
-// import { useContext, useState } from "react";
-// import { QuizPayloadType } from "../types";
-// import InputOptionCard from "../components/InputOptionCard";
-// import { QuizContext } from "../context/index.tsx";
-// const CreateQuiz = () => {
-//   const [questionCount, setQuestionCount] = useState(2); // Start with 2 options
-//   const [quizPayload , setQuizPayload] = useState<QuizPayloadType>({
-//     type: "create-room",
-//     username: "",
-//     payload: [{
-//       question: "",
-//       correctOption: "",
-//       option1: "",
-//       option2: ""
-//     }]
-//   })
-// //
-// // hooks can't be called inside a function
-//   const { questionList } = useContext(QuizContext);
-
-//   const submitQuizHandler = () => {
-//       setQuizPayload((prev) => ({
-//         ...prev,
-//         payload: questionList
-//       }))
-
-//     }
-
-//     console.log(quizPayload);
-
-//   const addQuestion = () => {
-//     setQuestionCount((prev) => prev + 1);
-//   }
-
-//   const removeQuestion = () => {
-//     if (questionCount > 2) {
-//       setQuestionCount((prev) => prev - 1);
-//     }
-//   };
-//   return (
-//     <div>
-//         <div><h1>Create Your own quiz with Quikz</h1></div>
-//         {
-//             Array.from({length : questionCount} , (_ , idx) => (
-
-//                     <InputOptionCard key={idx} index={idx}/>
-
-//             ))
-//         }
-
-//         <button onClick={addQuestion}>Add Question</button>
-//         <button onClick={removeQuestion}>Remove Question</button>
-//         <button onClick={submitQuizHandler}>Submit</button>
-//     </div>
-//   );
-// };
-
-// export default CreateQuiz;
 
 import { useContext, useEffect, useState } from "react";
 import { QuizPayloadType, QuizQuestionType } from "../types";
@@ -77,6 +19,8 @@ const CreateQuiz = () => {
         correctOption: "",
         option1: "",
         option2: "",
+        option3:"",
+        option4: "",
       },
     ],
   });

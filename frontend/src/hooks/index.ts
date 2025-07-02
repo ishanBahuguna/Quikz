@@ -4,7 +4,7 @@ import { RoomCodeContext } from '../context';
 const useSocket = (url: string) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [response, setResponse] = useState<string>("");
-  const [isConnected, setIsConnected] = useState(false); // <- NEW
+  const [isConnected, setIsConnected] = useState(false); 
   const { setRoomCode } = useContext(RoomCodeContext)
 
   useEffect(() => {

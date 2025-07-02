@@ -30,11 +30,17 @@ interface QuizQuestionType {
 }
 
 interface QuizPayloadType {
-    username:string,
-    type:string,
-    payload:[QuizQuestionType]
+    username?:string | null,
+    type?:string | null,
+    payload:QuizQuestionType[]
+}
+
+interface UserPointsType {
+    username : string | null,
+    ws: WebSocket,
+    points : number | 0
 }
 
 
 
-export {userType , QuizPayloadType , JoinRoomType}
+export {userType , QuizPayloadType , JoinRoomType , QuizQuestionType, UserMessageType, RoomType , UserPointsType};

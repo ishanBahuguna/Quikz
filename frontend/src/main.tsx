@@ -1,16 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App.tsx'
-import { QuizProvider , RoomCodeProvider } from './context/index.tsx'
+import App from './App.tsx';
+import { PointsProvider, QuizProvider, RoomCodeProvider, SelectedOptionProvider } from './context/index.tsx';
 
 createRoot(document.getElementById('root')!).render(
-//   <StrictMode>
+  //   <StrictMode>
 
-//   </StrictMode>,
-    <QuizProvider>
+  //   </StrictMode>,
+  <PointsProvider>
+    <SelectedOptionProvider>
+      <QuizProvider>
         <RoomCodeProvider>
-        <App />
+          <App />
         </RoomCodeProvider>
-    </QuizProvider>
-)
+      </QuizProvider>
+    </SelectedOptionProvider>
+  </PointsProvider>
+);
