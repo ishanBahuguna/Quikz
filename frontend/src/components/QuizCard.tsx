@@ -1,9 +1,9 @@
 
 import type React from 'react';
-import { useState, useContext } from 'react';
+import {  useContext } from 'react';
 import type { QuizQuestionType } from '../types';
-import { RoomCodeContext, SelectedOptionContext } from '../context';
-import useSocket from '../hooks/index';
+import {  SelectedOptionContext } from '../context';
+
 import { HelpCircle, CheckCircle } from 'lucide-react';
 
 const QuizCard = (props: QuizQuestionType) => {

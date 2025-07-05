@@ -5,7 +5,7 @@ import Signin from './pages/Signin'
 import CreateQuiz from './pages/CreateQuiz'
 import Room from './pages/Room'
 import Admin from './pages/Admin'
-import Demo from './pages/Demo'
+
 const App = () => {
   return (
     <Router>
@@ -15,7 +15,7 @@ const App = () => {
         <Route path='/signup' element={<h1>Signup</h1>} />
         <Route path='/room' element={<Room/>} />
         <Route path='/admin' element={<Admin/>} />
-        <Route path='/demo' element={<Demo/>} />
+
       </Routes>
     </Router>
     )
