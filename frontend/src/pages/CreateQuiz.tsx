@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
-import { QuizPayloadType, QuizQuestionType } from "../types";
+import { QuizPayloadType } from "../types";
 import InputOptionCard from "../components/InputOptionCard";
 import { QuizContext } from "../context";
 import { Plus, Minus, Check } from "lucide-react";
@@ -8,7 +8,7 @@ import useSocket from "../hooks";
 import { useNavigate } from "react-router-dom";
 
 const CreateQuiz = () => {
-  const { response , sendMessage, isConnected } = useSocket("ws://localhost:5000");
+  const {  sendMessage, isConnected } = useSocket("ws://localhost:5000");
   const [questionCount, setQuestionCount] = useState(2); // Start with 2 options
   const [quizPayload, setQuizPayload] = useState<QuizPayloadType>({
     type: "",

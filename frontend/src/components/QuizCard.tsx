@@ -8,9 +8,9 @@ import { HelpCircle, CheckCircle } from 'lucide-react';
 
 const QuizCard = (props: QuizQuestionType) => {
   const { selectedOption, setSelectedOption } = useContext(SelectedOptionContext);
-  const [option, setOption] = useState<string | null>(null);
-  const { sendMessage } = useSocket('ws://localhost:5000');
-  const { roomCode } = useContext(RoomCodeContext);
+//   const [option, setOption] = useState<string | null>(null);
+//   const { sendMessage } = useSocket('ws://localhost:5000');
+//   const { roomCode } = useContext(RoomCodeContext);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);

@@ -1,6 +1,6 @@
-import { createContext, useRef, useState , useEffect } from "react";
+import { createContext, useState  } from "react";
 import { QuizQuestionType , UserPointsType } from "../types";
-import react from "react";   
+// import react from "react";   
 
 interface QuizContextType {
     questionList: QuizQuestionType[];

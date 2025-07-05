@@ -16,7 +16,7 @@ const Room = () => {
   const [showClock1, setShowClock1] = useState<boolean>(false)
   const [showClock2, setShowClock2] = useState<boolean>(false)
   const [timerId, setTimerId] = useState<number>(0)
-  const [delay, setDelay] = useState(15) // default delay
+  const [delay , setDelay] = useState(15) // default delay
   const [currentQuestion, setCurrentQuestion] = useState<QuizQuestionType>({
     question: "",
     correctOption: "",
@@ -48,6 +48,7 @@ const Room = () => {
         const clockDelay = Math.ceil(Math.max(startAt - Date.now(), 0) / 1000)
         setDelay(clockDelay)
         // Show countdown timer
+        console.log(delay)
         setShowClock1(true)
         setShowClock2(false)
         setTimerId((prev) => prev + 1)
