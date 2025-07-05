@@ -41,6 +41,12 @@ interface UserPointsType {
     points : number | 0
 }
 
+export interface AdminType {
+    roomCode : string, 
+    username : string, 
+    ws: WebSocket
+}
+
 
 
 export {userType , QuizPayloadType , JoinRoomType , QuizQuestionType, UserMessageType, RoomType , UserPointsType};

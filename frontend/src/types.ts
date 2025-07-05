@@ -39,7 +39,42 @@ interface QuizPayloadType {
     type:string,
     payload:QuizQuestionType[]
 }
+export interface UserPointsType {
+    username : string,
+    ws: WebSocket,
+    points : number
+}
 
 
 
 export {userType , QuizPayloadType , JoinRoomType , QuizQuestionType, UserMessageType, RoomType , JoinPayloadType}
+
+
+
+// types for leaderboard
+// types.ts
+export interface User {
+  userID: string;
+  displayName: string;
+  score: number;
+  picture?: string;
+  previousRank?: number;
+}
+
+export interface LeaderboardItemProps {
+  row: User;
+  rank: number;
+  previousRank?: number;
+  isAnimating: boolean;
+}
+
+export interface LeaderboardListProps {
+  data: User[];
+  previousData: User[] | null;
+}
+
+export interface LeaderboardProps {
+  points?: Record<string, number>;
+}
+
+export interface AppProps {}

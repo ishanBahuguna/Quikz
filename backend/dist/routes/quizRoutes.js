@@ -16,6 +16,7 @@ const questions = new Map();
 // rooms --> key : roomCode , value : array of users
 const rooms = new Map();
 const points = new Map();
+const admins = new Map();
 wss.on('connection', (ws) => {
     ws.send(JSON.stringify('Joined to the socket successfully'));
     ws.on('message', (data) => __awaiter(void 0, void 0, void 0, function* () {
@@ -74,6 +75,15 @@ wss.on('connection', (ws) => {
                     if (questions.size === 0)
                         throw new Error('No questions available');
                     const { roomCode } = JSON.parse(data.toString());
+                    //   storing admin websocket connection in order to send quiz points later in answer route
+                    if (admins.has(roomCode)) {
+                        ws.send(JSON.stringify({
+                            success: false,
+                            message: 'Room already exists',
+                        }));
+                        return;
+                    }
+                    admins.set(roomCode, ws);
                     // giving an assurance that all questions and clients have specific types
                     let allQuestions = questions.get(roomCode);
                     let clients = rooms.get(roomCode);
@@ -121,8 +131,8 @@ wss.on('connection', (ws) => {
                     if (!clients)
                         throw new Error('Invalid room code');
                     const user = clients.find((u) => u.ws === ws);
-                    console.log('Answer from user : ', answer);
-                    console.log('Correct answer from question : ', correctAnswer);
+                    //   console.log('Answer from user : ', answer);
+                    //   console.log('Correct answer from question : ', correctAnswer);
                     if (answer === correctAnswer) {
                         if (user) {
                             user.points += 10; // Increment points by 10 for correct answer
@@ -136,16 +146,27 @@ wss.on('connection', (ws) => {
                             user.points = user.points === 0 ? 0 : user.points - 10;
                         }
                     }
-                    console.log('Clients after answer : ', clients);
+                    //   console.log('Clients after answer : ', clients);
                     points.set(roomCode, clients);
-                    clients.forEach((client) => {
-                        if (client.ws.readyState === ws_1.WebSocket.OPEN) {
-                            client.ws.send(JSON.stringify({
-                                type: 'answer',
-                                points: client.points,
-                            }));
-                        }
-                    });
+                    console.log('Points after answer: ', points.get(roomCode));
+                    //   clients.forEach((client) => {
+                    //     if (client.ws.readyState === WebSocket.OPEN) {
+                    //       client.ws.send(
+                    //         JSON.stringify({
+                    //           type: 'answer',
+                    //           points: points.get(roomCode)
+                    //         })
+                    //       );
+                    //     }
+                    //   });
+                    const admin = admins.get(roomCode);
+                    console.log('Admin from answer : ', admin);
+                    if (admin && admin.readyState === ws_1.WebSocket.OPEN) {
+                        admin.send(JSON.stringify({
+                            type: 'points',
+                            points: points.get(roomCode),
+                        }));
+                    }
                 }
             }
             catch (e) {

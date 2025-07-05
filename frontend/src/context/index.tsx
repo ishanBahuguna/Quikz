@@ -1,5 +1,5 @@
 import { createContext, useRef, useState , useEffect } from "react";
-import { QuizQuestionType } from "../types";
+import { QuizQuestionType , UserPointsType } from "../types";
 import react from "react";   
 
 interface QuizContextType {
@@ -63,19 +63,19 @@ export const SelectedOptionProvider = (props: any) => {
 
 
 interface PointsContextType {
-    points: number | 0;
-    setPoints: React.Dispatch<React.SetStateAction<number | 0>>;
+    points: UserPointsType[];
+    setPoints: React.Dispatch<React.SetStateAction<UserPointsType[]>>;
     // pointsRef: React.RefObject<number>;
 }
 
 export const PointsContext = createContext<PointsContextType>({
-    points : 0,
+    points : [],
     setPoints: () => {},
     // pointsRef: useRef(0)
 });
 
 export const PointsProvider = (props:any) => {
-    const [points , setPoints] = useState<number | 0>(0);
+    const [points , setPoints] = useState<UserPointsType[]>([]);
 
     return (
         <PointsContext.Provider value = {{points , setPoints}}>
